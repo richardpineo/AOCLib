@@ -1,30 +1,30 @@
 
 import Foundation
 
-struct PuzzleProcessingId: Hashable {
-	var id: Int
-	var isA: Bool
+public struct PuzzleProcessingId: Hashable {
+	public var id: Int
+	public var isA: Bool
 
-	var description: String {
+	public var description: String {
 		"Day \(id + 1)-\(isA ? "a" : "b")"
 	}
 }
 
-class PuzzleProcessing: ObservableObject {
-	enum ProcessingStatus {
+public class PuzzleProcessing: ObservableObject {
+	public enum ProcessingStatus {
 		case idle
 		case processing(Date)
 	}
 
-	init(puzzles: Puzzles) {
+	public init(puzzles: Puzzles) {
 		self.puzzles = puzzles
 	}
 
-	static func application(puzzles: Puzzles) -> PuzzleProcessing {
+	public static func application(puzzles: Puzzles) -> PuzzleProcessing {
 		PuzzleProcessing(puzzles: puzzles)
 	}
 
-	static func preview(puzzles: Puzzles) -> PuzzleProcessing {
+	public static func preview(puzzles: Puzzles) -> PuzzleProcessing {
 		let processing = PuzzleProcessing(puzzles: puzzles)
 		processing.status[.init(id: 1, isA: true)] = .processing(Date())
 		return processing
@@ -32,9 +32,9 @@ class PuzzleProcessing: ObservableObject {
 
 	// A map from puzzle ID and A/B to current processing status
 	// If the value isn't in the map, then it's not processing.
-	@Published var status: [PuzzleProcessingId: ProcessingStatus] = [:]
+	@Published public var status: [PuzzleProcessingId: ProcessingStatus] = [:]
 
-	func isProcessing(_ id: PuzzleProcessingId) -> Bool {
+	public func isProcessing(_ id: PuzzleProcessingId) -> Bool {
 		guard let found = status[id] else {
 			return false
 		}
@@ -46,7 +46,7 @@ class PuzzleProcessing: ObservableObject {
 	}
 
 	// Amount of time processing, if processing or nil otherwise.
-	func elapsed(_ id: PuzzleProcessingId) -> TimeInterval? {
+	public func elapsed(_ id: PuzzleProcessingId) -> TimeInterval? {
 		guard let found = status[id] else {
 			return nil
 		}
@@ -58,7 +58,7 @@ class PuzzleProcessing: ObservableObject {
 		}
 	}
 
-	func startProcessing(_ id: PuzzleProcessingId) {
+	public func startProcessing(_ id: PuzzleProcessingId) {
 		if isProcessing(id) {
 			return
 		}
@@ -84,14 +84,14 @@ class PuzzleProcessing: ObservableObject {
 		}
 	}
 
-	func clearAll() {
+	public func clearAll() {
 		puzzles.puzzles.forEach { puzzle in
 			puzzle.solutionA = ""
 			puzzle.solutionB = ""
 		}
 	}
 
-	func processAll() {
+	public func processAll() {
 		clearAll()
 		puzzles.puzzles.forEach { puzzle in
 			startProcessing(.init(id: puzzle.id, isA: true))
