@@ -2,16 +2,16 @@
 import Foundation
 import SwiftUI
 
-enum SolutionState {
+public enum SolutionState {
 	case unsolved
 	case solved
 	case solvedA
 }
 
-class Puzzle: Identifiable, ObservableObject {
-	typealias MakeSolver = () -> PuzzleSolver
+public class Puzzle: Identifiable, ObservableObject {
+	public typealias MakeSolver = () -> PuzzleSolver
 
-	init(year: Int, id: Int, name: String, maker: @escaping MakeSolver) {
+	public init(year: Int, id: Int, name: String, maker: @escaping MakeSolver) {
 		self.year = year
 		self.id = id
 		self.name = name
@@ -21,30 +21,30 @@ class Puzzle: Identifiable, ObservableObject {
 		solutionB = UserDefaults.standard.string(forKey: Puzzle.userDefaultKey(year: year, id: id, isA: false)) ?? ""
 	}
 
-	var year: Int
-	var id: Int
-	var name: String
+	public var year: Int
+	public var id: Int
+	public var name: String
 
 	private var makeSolver: MakeSolver
 
-	var solver: PuzzleSolver {
+	public var solver: PuzzleSolver {
 		makeSolver()
 	}
 
-	var state: SolutionState {
+	public var state: SolutionState {
 		if solutionA.isEmpty {
 			return .unsolved
 		}
 		return solutionB.isEmpty ? .solvedA : .solved
 	}
 
-	@Published var solutionA: String {
+	@Published public var solutionA: String {
 		didSet {
 			UserDefaults.standard.set(solutionA, forKey: Puzzle.userDefaultKey(year: year, id: id, isA: true))
 		}
 	}
 
-	@Published var solutionB: String {
+	@Published public var solutionB: String {
 		didSet {
 			UserDefaults.standard.set(solutionB, forKey: Puzzle.userDefaultKey(year: year, id: id, isA: false))
 		}

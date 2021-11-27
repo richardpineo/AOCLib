@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-protocol PuzzlesRepo {
+public protocol PuzzlesRepo {
 	associatedtype Details: View
 
 	var title: String { get }

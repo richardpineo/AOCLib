@@ -1,7 +1,7 @@
 
 import Foundation
 
-class Puzzles: ObservableObject {
+public class Puzzles: ObservableObject {
 	static func preview() -> Puzzles {
 		let puzzles = Puzzles()
 
@@ -12,13 +12,13 @@ class Puzzles: ObservableObject {
 		return puzzles
 	}
 
-	func get(byId id: Int) -> Puzzle? {
+	public func get(byId id: Int) -> Puzzle? {
 		puzzles.first { $0.id == id }
 	}
 
-	@Published var puzzles: [Puzzle] = []
+	@Published public var puzzles: [Puzzle] = []
 
-	var ordered: [Puzzle] {
+	public var ordered: [Puzzle] {
 		puzzles.sorted { x, y in
 			switch (x.name.isEmpty, y.name.isEmpty) {
 			case (true, false): return false

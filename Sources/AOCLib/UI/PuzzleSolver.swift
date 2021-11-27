@@ -1,7 +1,7 @@
 
 import Foundation
 
-protocol PuzzleSolver {
+public protocol PuzzleSolver {
 	func solveA() -> String
 	func solveB() -> String
 
