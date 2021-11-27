@@ -1,3 +1,3 @@
 # AOCLib
 
-Shared code for advent of code.
+Shared code for advent of code in SwiftUI.
