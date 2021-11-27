@@ -1,7 +1,7 @@
 
 import Foundation
 
-public class MathHelper {
+public enum MathHelper {
 	// Stolen and ported from c# example here: https://www.geeksforgeeks.org/lcm-of-given-array-elements/
 	public static func lcm(of elements: [Int]) -> Int64 {
 		var element_array = elements.map { Int64($0) }
@@ -18,7 +18,7 @@ public class MathHelper {
 				if element_array[i] == 0 {
 					return 0
 				} else if element_array[i] < 0 {
-					element_array[i] = element_array[i] * (-1)
+					element_array[i] = element_array[i] * -1
 				}
 				if element_array[i] == 1 {
 					counter += 1

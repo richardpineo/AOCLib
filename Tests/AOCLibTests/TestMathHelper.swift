@@ -1,5 +1,5 @@
-import XCTest
 import AOCLib
+import XCTest
 
 class TestMathHelper: XCTestCase {
 	func testLcm() throws {
