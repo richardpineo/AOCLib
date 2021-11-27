@@ -16,11 +16,11 @@ public struct Queue<T> {
 		list.isEmpty
 	}
 
-	mutating func enqueue(_ element: T) {
+	public mutating func enqueue(_ element: T) {
 		list.append(element)
 	}
 
-	mutating func dequeue() -> T? {
+	public mutating func dequeue() -> T? {
 		if !list.isEmpty {
 			return list.removeFirst()
 		} else {
@@ -28,7 +28,7 @@ public struct Queue<T> {
 		}
 	}
 
-	func peek() -> T? {
+	public func peek() -> T? {
 		if !list.isEmpty {
 			return list[0]
 		} else {
@@ -36,11 +36,11 @@ public struct Queue<T> {
 		}
 	}
 
-	var count: Int {
+	public var count: Int {
 		list.count
 	}
 
-	var array: [T] {
+	public var array: [T] {
 		list
 	}
 }

@@ -2,18 +2,18 @@
 import Foundation
 
 public class FileHelper {
-	static func loadAndTokenize(_ filename: String) -> [[String]] {
+	public static func loadAndTokenize(_ filename: String) -> [[String]] {
 		let lines = load(filename) ?? []
 		return tokenize(lines.filter { !$0.isEmpty })
 	}
 
-	static func tokenize(_ values: [String]) -> [[String]] {
+	public static func tokenize(_ values: [String]) -> [[String]] {
 		values.map {
 			$0.components(separatedBy: " ")
 		}
 	}
 
-	static func load(_ filename: String) -> [String]? {
+	public static func load(_ filename: String) -> [String]? {
 		guard let path = Bundle.main.path(forResource: filename, ofType: "txt") else {
 			return nil
 		}
