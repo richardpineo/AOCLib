@@ -15,6 +15,10 @@ public class Node<T> {
 
 // 1. Change the declaration of the Node class to take a generic type T
 public class LinkedList<T>: CustomDebugStringConvertible where T: Equatable {
+	public init() {
+		
+	}
+	
 	public var debugDescription: String {
 		var c = head
 		var values: [T] = []
