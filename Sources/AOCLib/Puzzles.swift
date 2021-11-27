@@ -2,21 +2,15 @@
 import Foundation
 
 public class Puzzles: ObservableObject {
-	static func preview() -> Puzzles {
-		let puzzles = Puzzles()
-
-		puzzles.puzzles.append(PuzzlePreview.solved())
-		puzzles.puzzles.append(PuzzlePreview.partSolved())
-		puzzles.puzzles.append(PuzzlePreview.unsolved())
-
-		return puzzles
-	}
-
 	public func get(byId id: Int) -> Puzzle? {
 		puzzles.first { $0.id == id }
 	}
 
-	@Published public var puzzles: [Puzzle] = []
+	public init(puzzles: [Puzzle]) {
+		self.puzzles = puzzles
+	}
+
+	@Published public var puzzles: [Puzzle]
 
 	public var ordered: [Puzzle] {
 		puzzles.sorted { x, y in

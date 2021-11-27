@@ -32,13 +32,12 @@ class PuzzlePreview: PuzzlesRepo {
 	}
 
 	var puzzles: Puzzles {
-		let puzzles = Puzzles()
-
-		puzzles.puzzles.append(PuzzlePreview.solved())
-		puzzles.puzzles.append(PuzzlePreview.partSolved())
-		puzzles.puzzles.append(PuzzlePreview.unsolved())
-
-		return puzzles
+		let puzzles = [
+			PuzzlePreview.solved(),
+			PuzzlePreview.partSolved(),
+			PuzzlePreview.unsolved(),
+		]
+		return Puzzles(puzzles: puzzles)
 	}
 
 	func hasDetails(id _: Int) -> Bool {

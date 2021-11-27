@@ -2,7 +2,6 @@
 import SwiftUI
 
 public struct MainView<Repo: PuzzlesRepo>: View {
-	
 	public init(repo: Repo) {
 		self.repo = repo
 	}
@@ -61,6 +60,5 @@ public struct MainView<Repo: PuzzlesRepo>: View {
 struct MainView_Previews: PreviewProvider {
 	static var previews: some View {
 		MainView(repo: PuzzlePreview())
-			.environmentObject(Puzzles())
 	}
 }
