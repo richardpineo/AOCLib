@@ -3,6 +3,10 @@ import SwiftUI
 
 public struct ProcessingIndicatorView: View {
 	@State private var isProcessing = false
+	
+	public init() {
+		
+	}
 
 	public var body: some View {
 		ZStack {

@@ -2,7 +2,12 @@
 import SwiftUI
 
 public struct MainView<Repo: PuzzlesRepo>: View {
-	public var repo: Repo
+	
+	public init(repo: Repo) {
+		self.repo = repo
+	}
+
+	private var repo: Repo
 
 	// We want the OS to figure out the widths, just not smaller than our minimum.
 	private let gridItemLayout = [GridItem(.adaptive(minimum: 200))]
