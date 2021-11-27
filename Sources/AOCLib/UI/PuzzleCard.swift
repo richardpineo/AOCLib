@@ -27,20 +27,19 @@ struct PuzzleCard: View {
 					} else {
 						Text(puzzle.name)
 							.font(.system(size: 24))
-							.minimumScaleFactor(0.25)
-							.lineLimit(1)
+							.frame(height: 75)
 					}
 				}
 				.padding(.horizontal)
 				.fixedSize(horizontal: false, vertical: true)
 
+				Spacer()
+
 				SolutionView(puzzle: puzzle, isA: true)
-					.padding()
+					.padding(.horizontal)
 
 				SolutionView(puzzle: puzzle, isA: false)
 					.padding()
-
-				Spacer()
 			}
 		}
 		.frame(height: 300)
@@ -54,7 +53,7 @@ struct PuzzleCard: View {
 		case .unsolved:
 			return .systemRed
 		case .solvedA:
-			return .systemBlue
+			return .systemOrange
 		case .solved:
 			return .systemGreen
 		}
