@@ -1,7 +1,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
 	func character(at: Int) -> Character {
 		self[index(startIndex, offsetBy: at)]
 	}

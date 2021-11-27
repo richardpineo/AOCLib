@@ -1,3 +1,3 @@
 # AOCLib
 
-A description of this package.
+Shared code for advent of code.
