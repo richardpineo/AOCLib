@@ -1,7 +1,7 @@
 
 import Foundation
 
-class MathHelper {
+public class MathHelper {
 	// Stolen and ported from c# example here: https://www.geeksforgeeks.org/lcm-of-given-array-elements/
 	static func lcm(of elements: [Int]) -> Int64 {
 		var element_array = elements.map { Int64($0) }

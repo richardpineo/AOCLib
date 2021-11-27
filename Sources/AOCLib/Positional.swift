@@ -1,7 +1,7 @@
 
 import Foundation
 
-protocol Positional: Hashable {
+public protocol Positional: Hashable {
 	associatedtype dimensional
 
 	// remaining dimensions will be 0

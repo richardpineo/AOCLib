@@ -1,7 +1,7 @@
 
 import Foundation
 
-enum Heading {
+public enum Heading {
 	case north
 	case east
 	case south

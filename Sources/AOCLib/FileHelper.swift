@@ -1,7 +1,7 @@
 
 import Foundation
 
-class FileHelper {
+public class FileHelper {
 	static func loadAndTokenize(_ filename: String) -> [[String]] {
 		let lines = load(filename) ?? []
 		return tokenize(lines.filter { !$0.isEmpty })
