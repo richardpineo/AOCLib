@@ -7,7 +7,7 @@ public enum Heading {
 	case south
 	case west
 
-	var rightwards: Heading {
+	public var rightwards: Heading {
 		switch self {
 		case .north: return .east
 		case .east: return .south
@@ -16,7 +16,7 @@ public enum Heading {
 		}
 	}
 
-	var leftwards: Heading {
+	public var leftwards: Heading {
 		switch self {
 		case .north: return .west
 		case .east: return .north
@@ -25,11 +25,11 @@ public enum Heading {
 		}
 	}
 
-	func turn(right: Bool) -> Heading {
+	public func turn(right: Bool) -> Heading {
 		right ? rightwards : leftwards
 	}
 
-	func turn(right: Bool, _ numTurns: Int = 1) -> Heading {
+	public func turn(right: Bool, _ numTurns: Int = 1) -> Heading {
 		var heading = self
 		for _ in 0 ..< numTurns {
 			heading = right ? heading.rightwards : heading.leftwards
@@ -37,16 +37,16 @@ public enum Heading {
 		return heading
 	}
 
-	func turnRight(_ numTurns: Int = 1) -> Heading {
+	public func turnRight(_ numTurns: Int = 1) -> Heading {
 		turn(right: true, numTurns)
 	}
 
-	func turnLeft(_ numTurns: Int = 1) -> Heading {
+	public func turnLeft(_ numTurns: Int = 1) -> Heading {
 		turn(right: false, numTurns)
 	}
 
 	// Degrees rotated from facing east.
-	var clockwiseFromEast: Int {
+	public var clockwiseFromEast: Int {
 		switch self {
 		case .north: return 270
 		case .east: return 0

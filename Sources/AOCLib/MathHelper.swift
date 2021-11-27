@@ -3,7 +3,7 @@ import Foundation
 
 public class MathHelper {
 	// Stolen and ported from c# example here: https://www.geeksforgeeks.org/lcm-of-given-array-elements/
-	static func lcm(of elements: [Int]) -> Int64 {
+	public static func lcm(of elements: [Int]) -> Int64 {
 		var element_array = elements.map { Int64($0) }
 		var lcm_of_array_elements: Int64 = 1
 		var divisor: Int64 = 2

@@ -3,12 +3,12 @@
 // 1
 public class Node<T> {
 	// 2
-	var value: T
-	weak var next: Node<T>?
-	weak var previous: Node<T>?
+	public var value: T
+	public weak var next: Node<T>?
+	public weak var previous: Node<T>?
 
 	// 3
-	init(value: T) {
+	public init(value: T) {
 		self.value = value
 	}
 }
