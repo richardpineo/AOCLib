@@ -1,14 +1,14 @@
 
 import SwiftUI
 
-struct PuzzleProcessingView: View {
+public struct PuzzleProcessingView: View {
 	@EnvironmentObject var processing: PuzzleProcessing
 
-	var processingStep: Int
+	public var processingStep: Int
 
-	var processingId: PuzzleProcessingId
+	public var processingId: PuzzleProcessingId
 
-	var body: some View {
+	public var body: some View {
 		HStack {
 			Button(action: {
 				processing.startProcessing(processingId)
