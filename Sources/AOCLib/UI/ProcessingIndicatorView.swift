@@ -1,10 +1,10 @@
 
 import SwiftUI
 
-struct ProcessingIndicatorView: View {
+public struct ProcessingIndicatorView: View {
 	@State private var isProcessing = false
 
-	var body: some View {
+	public var body: some View {
 		ZStack {
 			RoundedRectangle(cornerRadius: 3)
 				.stroke(Color(.systemGray5), lineWidth: 3)
