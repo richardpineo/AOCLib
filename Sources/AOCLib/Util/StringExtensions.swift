@@ -1,6 +1,6 @@
 
-import Foundation
 import CryptoKit
+import Foundation
 
 public extension String {
 	func character(at: Int) -> Character {
@@ -37,12 +37,12 @@ public extension String {
 	}
 
 	var md5: String {
-		return md5Data.map {
+		md5Data.map {
 			String(format: "%02hhx", $0)
 		}.joined()
 	}
-	
+
 	var md5Data: Insecure.MD5.Digest {
-		return Insecure.MD5.hash(data: self.data(using: .utf8) ?? Data())
+		Insecure.MD5.hash(data: data(using: .utf8) ?? Data())
 	}
 }

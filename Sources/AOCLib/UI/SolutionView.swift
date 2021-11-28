@@ -8,37 +8,62 @@ struct SolutionView: View {
 	var puzzle: Puzzle
 	var isA: Bool
 	@State var processingStep: Int = 0
+	@State private var isPulsing = false
 
 	var body: some View {
 		HStack {
 			Spacer()
-			VStack {
-				if processing.isProcessing(processingId) {
-					Text(elapsed)
-				} else {
-					let sol = isA ? puzzle.solutionA : puzzle.solutionB
 
-					if sol.isEmpty {
-						Text("UNSOLVED")
-					} else {
-						Text(shortenIfNeeded(sol))
-							.lineLimit(1)
-							.minimumScaleFactor(0.5)
-					}
+			if processing.isProcessing(processingId) {
+				Text(elapsed)
+			} else {
+				if solution.isEmpty {
+					Text("UNSOLVED")
+				} else {
+					Text(shortenIfNeeded(solution))
+						.lineLimit(1)
+						.minimumScaleFactor(0.5)
 				}
 			}
+
 			Spacer()
+
 			PuzzleProcessingView(processingStep: processingStep, processingId: PuzzleProcessingId(id: puzzle.id, isA: isA))
 		}
 		.padding()
 		.frame(maxWidth: .infinity)
-		.background(Color(.gray).opacity(0.5))
+		.contentShape(Rectangle())
+		.onTapGesture {
+			if solution.isEmpty || processing.isProcessing(processingId) {
+				return
+			}
+			UIPasteboard.general.string = solution
+			pulsateText()
+		}
+		.background(backgroundColor
+						.opacity(isPulsing ? 1 : 0.5)
+		)
 		.cornerRadius(10)
 		.overlay(
 			RoundedRectangle(cornerRadius: 10)
 				.stroke(Color.black, lineWidth: 2))
 		.onReceive(self.timer) { _ in
 			self.processingStep = self.processingStep + 1
+		}
+	}
+	
+	private var solution: String {
+		isA ? puzzle.solutionA : puzzle.solutionB
+	}
+
+	private var backgroundColor: Color {
+		isPulsing ? Color.accentColor : Color.gray
+	}
+
+	private func pulsateText() {
+		isPulsing = true
+		withAnimation(Animation.easeInOut) {
+			isPulsing = false
 		}
 	}
 
