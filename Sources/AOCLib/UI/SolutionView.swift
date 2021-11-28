@@ -41,7 +41,7 @@ struct SolutionView: View {
 			pulsateText()
 		}
 		.background(backgroundColor
-						.opacity(isPulsing ? 1 : 0.5)
+			.opacity(isPulsing ? 1 : 0.5)
 		)
 		.cornerRadius(10)
 		.overlay(
@@ -51,7 +51,7 @@ struct SolutionView: View {
 			self.processingStep = self.processingStep + 1
 		}
 	}
-	
+
 	private var solution: String {
 		isA ? puzzle.solutionA : puzzle.solutionB
 	}
