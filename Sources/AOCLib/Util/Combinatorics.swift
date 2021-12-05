@@ -27,12 +27,12 @@ public enum Combinatorics {
 	// Partitions a set of n values with m nonempty partitions.
 	// so for n=4 and m=2 this would return [1,3] and [2,2] but it would not
 	// return [3,1] because that is a duplicate.
-	public static func partition(_ n: Int, _ m: Int) -> Array<Array<Int>> {
+	public static func partition(_ n: Int, _ m: Int) -> [[Int]] {
 		var q = Queue<Int>()
 		return partition(n, 1, m, &q)
 	}
 
-	private static func partition(_ n: Int, _ digitFrom: Int, _ m: Int, _ s: inout Queue<Int>) -> Array<Array<Int>> {
+	private static func partition(_ n: Int, _ digitFrom: Int, _ m: Int, _ s: inout Queue<Int>) -> [[Int]] {
 		let digitTo = n - m + 1
 		if digitFrom > digitTo {
 			return []
@@ -42,7 +42,7 @@ public enum Combinatorics {
 			combo.append(n)
 			return [combo]
 		}
-		var answers: Array<Array<Int>> = []
+		var answers: [[Int]] = []
 		for firstDigit in digitFrom ... digitTo {
 			s.enqueue(firstDigit)
 			let a = partition(n - firstDigit, firstDigit, m - 1, &s)
