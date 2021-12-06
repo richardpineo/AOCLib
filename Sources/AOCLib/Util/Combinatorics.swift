@@ -3,15 +3,15 @@
 import Foundation
 
 public enum Combinatorics {
-	public static func permutations(_ a: [String]) -> [[String]] {
+	public static func permutations<T>(_ a: [T]) -> [[T]] where T: Hashable {
 		var local = a
-		var output = Set<[String]>()
+		var output = Set<[T]>()
 		permutations(a.count, &local, &output)
 		return Array(output)
 	}
 
 	// https://stackoverflow.com/questions/34968470/calculate-all-permutations-of-a-string-in-swift
-	private static func permutations(_ n: Int, _ a: inout [String], _ out: inout Set<[String]>) {
+	private static func permutations<T>(_ n: Int, _ a: inout [T], _ out: inout Set<[T]>) {
 		if n == 1 {
 			// print(a);
 			out.insert(a)
@@ -22,6 +22,27 @@ public enum Combinatorics {
 			a.swapAt(n - 1, (n % 2 == 1) ? 0 : i)
 		}
 		permutations(n - 1, &a, &out)
+	}
+
+	public static func powerset<T>(_ a: [T]) -> [[T]] {
+		guard a.count > 0 else {
+			return [[]]
+		}
+
+		// tail contains the whole array BUT the first element
+		let tail = Array(a[1 ..< a.endIndex])
+
+		// head contains only the first element
+		let head = a[0]
+
+		// computing the tail's powerset
+		let withoutHead = powerset(tail)
+
+		// mergin the head with the tail's powerset
+		let withHead = withoutHead.map { $0 + [head] }
+
+		// returning the tail's powerset and the just computed withHead array
+		return withHead + withoutHead
 	}
 
 	// Partitions a set of n values with m nonempty partitions.
