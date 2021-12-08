@@ -2,7 +2,6 @@
 import Foundation
 
 public enum MathHelper {
-
 	// https://codereview.stackexchange.com/questions/166324/prime-factorisation-in-swift
 	public static func primeFactors(_ n: Int) -> [Int] {
 		var n = n
