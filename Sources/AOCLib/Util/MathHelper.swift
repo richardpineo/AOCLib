@@ -2,6 +2,27 @@
 import Foundation
 
 public enum MathHelper {
+
+	// https://codereview.stackexchange.com/questions/166324/prime-factorisation-in-swift
+	public static func primeFactors(_ n: Int) -> [Int] {
+		var n = n
+		var factors: [Int] = []
+
+		var divisor = 2
+		while divisor * divisor <= n {
+			while n % divisor == 0 {
+				factors.append(divisor)
+				n /= divisor
+			}
+			divisor += divisor == 2 ? 1 : 2
+		}
+		if n > 1 {
+			factors.append(n)
+		}
+
+		return factors
+	}
+
 	// Stolen and ported from c# example here: https://www.geeksforgeeks.org/lcm-of-given-array-elements/
 	public static func lcm(of elements: [Int]) -> Int64 {
 		var element_array = elements.map { Int64($0) }
