@@ -31,10 +31,21 @@ public struct Grid2D {
 		values[pos.arrayIndex(numCols: maxPos.x)] = i
 	}
 	
-	public func neighbors(_ pos: Position2D, includePos: Bool) -> [Position2D] {
+	public func neighbors(_ pos: Position2D, includePos: Bool, includeDiagonals: Bool = false) -> [Position2D] {
 		pos.neighbors(includeSelf: includePos)
-			.filter { $0.cityDistance(pos) < 2 }
+			.filter { includeDiagonals || $0.cityDistance(pos) < 2 }
 			.filter { valid($0) }
+	}
+	
+	public var debugDisplay: String {
+		var s = ""
+		for y in 0 ..< maxPos.y {
+		for x in 0 ..< maxPos.x {
+				s += String(value(.init(x,y)))
+			}
+			s += "\n"
+		}
+		return s
 	}
 
 	private var values: [Int]
