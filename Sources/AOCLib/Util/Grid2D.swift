@@ -30,9 +30,9 @@ public struct Grid2D {
 	public mutating func setValue(_ pos: Position2D, _ i: Int) {
 		values[pos.arrayIndex(numCols: maxPos.x)] = i
 	}
-	
-	public func allSatisfy(_ pred: (Int) -> Bool ) -> Bool {
-		values.allSatisfy{ pred($0) }
+
+	public func allSatisfy(_ pred: (Int) -> Bool) -> Bool {
+		values.allSatisfy { pred($0) }
 	}
 
 	public func neighbors(_ pos: Position2D, includePos: Bool, includeDiagonals: Bool = false) -> [Position2D] {
