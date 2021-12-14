@@ -16,13 +16,13 @@ public struct Grid2D {
 			}
 		}
 	}
-	
+
 	public init(positions: [Position2D], value: Int) {
 		maxPos = Position2D(
 			positions.max { $0.x < $1.x }!.x + 1,
 			positions.max { $0.y < $1.y }!.y + 1
 		)
-		values = Array<Int>(repeating: 0, count: maxPos.arrayIndex(numCols: maxPos.x))
+		values = [Int](repeating: 0, count: maxPos.arrayIndex(numCols: maxPos.x))
 		positions.forEach {
 			setValue($0, value)
 		}
@@ -53,14 +53,14 @@ public struct Grid2D {
 	}
 
 	public var debugDisplay: String {
-		return debugDisplay { String($0) }
+		debugDisplay { String($0) }
 	}
-	
-	public func debugDisplay(convert: (Int) -> String) -> String{
+
+	public func debugDisplay(convert: (Int) -> String) -> String {
 		var s = ""
 		for y in 0 ..< maxPos.y {
 			for x in 0 ..< maxPos.x {
-				s += convert( value(.init(x, y)))
+				s += convert(value(.init(x, y)))
 			}
 			s += "\n"
 		}
