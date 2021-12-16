@@ -27,10 +27,10 @@ public struct Grid2D {
 			setValue($0, value)
 		}
 	}
-	
+
 	public init(maxPos: Position2D, initialValue: Int) {
 		self.maxPos = maxPos
-		values = [Int](repeating: initialValue, count: maxPos.arrayIndex(numCols: maxPos.x-1))
+		values = [Int](repeating: initialValue, count: maxPos.arrayIndex(numCols: maxPos.x - 1))
 	}
 
 	public var maxPos: Position2D
