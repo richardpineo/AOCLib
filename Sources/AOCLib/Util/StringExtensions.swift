@@ -36,6 +36,15 @@ public extension String {
 		self = ass.pad(toSize: 36)
 	}
 
+	func hexToBinary() -> String {
+		var result = ""
+		forEach {
+			let bin = String(Int(String($0), radix: 16)!, radix: 2)
+			result.append(bin.pad(toSize: 4))
+		}
+		return result
+	}
+
 	var md5: String {
 		md5Data.map {
 			String(format: "%02hhx", $0)
