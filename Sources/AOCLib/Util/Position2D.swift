@@ -41,10 +41,11 @@ public struct Position2D: Comparable, Positional {
 		lhs.x == rhs.x ? lhs.y < rhs.y : lhs.x < rhs.x
 	}
 
+	// Returns positions in order, top left to bottom right.
 	public func neighbors(includeSelf: Bool) -> [Position2D] {
 		var ns: [Position2D] = []
-		for x in -1 ... 1 {
-			for y in -1 ... 1 {
+		for y in -1 ... 1 {
+			for x in -1 ... 1 {
 				let pos = Position2D(x, y)
 				if includeSelf || pos != .origin {
 					ns.append(pos)
