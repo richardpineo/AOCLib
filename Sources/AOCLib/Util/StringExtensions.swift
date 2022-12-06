@@ -54,6 +54,17 @@ public extension String {
 	var md5Data: Insecure.MD5.Digest {
 		Insecure.MD5.hash(data: data(using: .utf8) ?? Data())
 	}
+
+	// Case sensitive
+	var isUnique: Bool {
+		let sorted = String(sorted())
+		for index in 1...sorted.count {
+			if sorted.character(at: index) == sorted.character(at: index - 1) {
+				return false
+			}
+		}
+		return true
+	}
 }
 
 public extension StringProtocol {
