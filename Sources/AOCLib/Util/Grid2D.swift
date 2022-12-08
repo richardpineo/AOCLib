@@ -34,6 +34,16 @@ public struct Grid2D {
 	}
 
 	public var maxPos: Position2D
+	
+	public var allPositions: [Position2D] {
+		var positions: [Position2D] = []
+		for x in 0..<maxPos.x {
+			for y in 0..<maxPos.y {
+				positions.append(.init(x, y))
+			}
+		}
+		return positions
+	}
 
 	public func valid(_ pos: Position2D) -> Bool {
 		pos.x >= 0 && pos.y >= 0 && pos.x < maxPos.x && pos.y < maxPos.y
