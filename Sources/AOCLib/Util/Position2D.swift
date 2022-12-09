@@ -28,6 +28,19 @@ public struct Position2D: Comparable, Positional {
 	public func offset(_ step: Position2D) -> Position2D {
 		offset(step.x, step.y)
 	}
+	
+	public func offset(_ heading: Heading, _ distance: Int = 1) -> Position2D {
+		switch heading {
+		case .north:
+			return offset(0, 1)
+		case .south:
+			return offset(0, -1)
+		case .east:
+			return offset(1, 0)
+		case .west:
+			return offset(-1, 0)
+		}
+	}
 
 	public func arrayIndex(numCols: Int) -> Int {
 		x + y * numCols
