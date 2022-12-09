@@ -32,13 +32,13 @@ public struct Position2D: Comparable, Positional {
 	public func offset(_ heading: Heading, _ distance: Int = 1) -> Position2D {
 		switch heading {
 		case .north:
-			return offset(0, 1)
+			return offset(0, distance)
 		case .south:
-			return offset(0, -1)
+			return offset(0, -distance)
 		case .east:
-			return offset(1, 0)
+			return offset(distance, 0)
 		case .west:
-			return offset(-1, 0)
+			return offset(-distance, 0)
 		}
 	}
 
