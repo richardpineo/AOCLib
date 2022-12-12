@@ -38,7 +38,7 @@ public struct Grid2D {
 		self.values = values
 	}
 	
-	func clone() -> Grid2D {
+	public func clone() -> Grid2D {
 		.init(maxPos: self.maxPos, values: self.values)
 	}
 
