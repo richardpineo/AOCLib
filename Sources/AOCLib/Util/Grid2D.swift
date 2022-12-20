@@ -32,22 +32,22 @@ public struct Grid2D {
 		self.maxPos = maxPos
 		values = [Int](repeating: initialValue, count: maxPos.arrayIndex(numCols: maxPos.x - 1))
 	}
-	
+
 	private init(maxPos: Position2D, values: [Int]) {
 		self.maxPos = maxPos
 		self.values = values
 	}
-	
+
 	public func clone() -> Grid2D {
-		.init(maxPos: self.maxPos, values: self.values)
+		.init(maxPos: maxPos, values: values)
 	}
 
 	public var maxPos: Position2D
-	
+
 	public var allPositions: [Position2D] {
 		var positions: [Position2D] = []
-		for x in 0..<maxPos.x {
-			for y in 0..<maxPos.y {
+		for x in 0 ..< maxPos.x {
+			for y in 0 ..< maxPos.y {
 				positions.append(.init(x, y))
 			}
 		}

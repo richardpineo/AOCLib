@@ -58,7 +58,7 @@ public extension String {
 	// Case sensitive
 	var isUnique: Bool {
 		let sorted = String(sorted())
-		for index in 1..<sorted.count {
+		for index in 1 ..< sorted.count {
 			if sorted.character(at: index) == sorted.character(at: index - 1) {
 				return false
 			}

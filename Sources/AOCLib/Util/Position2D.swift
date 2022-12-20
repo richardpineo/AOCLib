@@ -12,6 +12,20 @@ public struct Position2D: Comparable, Positional {
 		y = arrayIndex / numCols
 	}
 
+	public init(from displayString: String) {
+		let tokens = displayString.split(separator: ",")
+		guard tokens.count == 2,
+		      let x = Int(tokens[0]),
+		      let y = Int(tokens[1])
+		else {
+			x = 0
+			y = 0
+			return
+		}
+		self.x = x
+		self.y = y
+	}
+
 	public static var origin: Position2D { Position2D(0, 0) }
 
 	public var x: Int
@@ -28,7 +42,7 @@ public struct Position2D: Comparable, Positional {
 	public func offset(_ step: Position2D) -> Position2D {
 		offset(step.x, step.y)
 	}
-	
+
 	public func offset(_ heading: Heading, _ distance: Int = 1) -> Position2D {
 		switch heading {
 		case .north:
