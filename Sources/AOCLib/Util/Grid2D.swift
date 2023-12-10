@@ -4,36 +4,36 @@ import Foundation
 public struct Grid2D {
 	public init(fileName: String) {
 		let values = FileHelper.load(fileName)!.filter { !$0.isEmpty }
-		self.init(intValues: values)
+		self.init(lines: values)
 	}
 
-	public init(intValues: [String]) {
-		maxPos = .init(intValues[0].count, intValues.count)
+	public init(lines: [String]) {
+		maxPos = .init(lines[0].count, lines.count)
 		values = []
-		intValues.forEach {
+		lines.forEach {
 			$0.forEach {
-				values.append(Int(String($0))!)
+				values.append(Character(String($0)))
 			}
 		}
 	}
 
-	public init(positions: [Position2D], value: Int) {
+	public init(positions: [Position2D], value: Character) {
 		maxPos = Position2D(
 			positions.max { $0.x < $1.x }!.x + 1,
 			positions.max { $0.y < $1.y }!.y + 1
 		)
-		values = [Int](repeating: 0, count: maxPos.arrayIndex(numCols: maxPos.x))
+		values = [Character](repeating: "0", count: maxPos.arrayIndex(numCols: maxPos.x))
 		positions.forEach {
 			setValue($0, value)
 		}
 	}
 
-	public init(maxPos: Position2D, initialValue: Int) {
+	public init(maxPos: Position2D, initialValue: Character) {
 		self.maxPos = maxPos
-		values = [Int](repeating: initialValue, count: maxPos.arrayIndex(numCols: maxPos.x - 1))
+		values = [Character](repeating: initialValue, count: maxPos.arrayIndex(numCols: maxPos.x - 1))
 	}
 
-	private init(maxPos: Position2D, values: [Int]) {
+	private init(maxPos: Position2D, values: [Character]) {
 		self.maxPos = maxPos
 		self.values = values
 	}
@@ -58,15 +58,15 @@ public struct Grid2D {
 		pos.x >= 0 && pos.y >= 0 && pos.x < maxPos.x && pos.y < maxPos.y
 	}
 
-	public func value(_ pos: Position2D) -> Int {
+	public func value(_ pos: Position2D) -> Character {
 		values[pos.arrayIndex(numCols: maxPos.x)]
 	}
 
-	public mutating func setValue(_ pos: Position2D, _ i: Int) {
+	public mutating func setValue(_ pos: Position2D, _ i: Character) {
 		values[pos.arrayIndex(numCols: maxPos.x)] = i
 	}
 
-	public func allSatisfy(_ pred: (Int) -> Bool) -> Bool {
+	public func allSatisfy(_ pred: (Character) -> Bool) -> Bool {
 		values.allSatisfy { pred($0) }
 	}
 
@@ -80,7 +80,7 @@ public struct Grid2D {
 		debugDisplay { String($0) }
 	}
 
-	public func debugDisplay(convert: (Int) -> String) -> String {
+	public func debugDisplay(convert: (Character) -> String) -> String {
 		var s = ""
 		for y in 0 ..< maxPos.y {
 			for x in 0 ..< maxPos.x {
@@ -91,5 +91,5 @@ public struct Grid2D {
 		return s
 	}
 
-	private var values: [Int]
+	private var values: [Character]
 }
