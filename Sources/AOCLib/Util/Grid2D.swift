@@ -55,7 +55,7 @@ public struct Grid2D {
 	}
 	
 	public func col(_ y: Int) -> String {
-		if y >= maxPos.y {
+		if y >= maxPos.x {
 			return ""
 		}
 		return (0 ..< maxPos.y).reduce("") {
@@ -64,7 +64,7 @@ public struct Grid2D {
 	}
 
 	public func row(_ x: Int) -> String {
-		if x >= maxPos.x {
+		if x >= maxPos.y {
 			return ""
 		}
 
