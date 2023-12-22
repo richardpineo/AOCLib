@@ -53,7 +53,26 @@ public struct Grid2D {
 		}
 		return positions
 	}
+	
+	public func col(_ y: Int) -> String {
+		if y >= maxPos.y {
+			return ""
+		}
+		return (0 ..< maxPos.y).reduce("") {
+			$0 + String(value(.init(y, $1)))
+		}
+	}
 
+	public func row(_ x: Int) -> String {
+		if x >= maxPos.x {
+			return ""
+		}
+
+		return (0 ..< maxPos.x).reduce("") {
+			$0 + String(value(.init($1, x)))
+		}
+	}
+	
 	public func valid(_ pos: Position2D) -> Bool {
 		pos.x >= 0 && pos.y >= 0 && pos.x < maxPos.x && pos.y < maxPos.y
 	}
