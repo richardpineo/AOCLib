@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct Grid2D {
+public struct Grid2D: Hashable {
 	public init(fileName: String) {
 		let values = FileHelper.load(fileName)!.filter { !$0.isEmpty }
 		self.init(lines: values)
