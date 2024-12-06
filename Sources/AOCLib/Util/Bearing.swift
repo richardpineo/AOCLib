@@ -1,5 +1,5 @@
 @DebugDescription
-struct Bearing: Hashable {
+public struct Bearing: Hashable {
 	var position: Position2D
 	var heading: Heading
 	
