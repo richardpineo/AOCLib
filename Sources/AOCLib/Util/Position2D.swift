@@ -55,6 +55,10 @@ public struct Position2D: Comparable, Positional {
 			return offset(-distance, 0)
 		}
 	}
+	
+	static public func + (lhs: Position2D, rhs: Position2D) -> Position2D {
+		lhs.offset(rhs)
+	}
 
 	public func arrayIndex(numCols: Int) -> Int {
 		x + y * numCols
