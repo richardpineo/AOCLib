@@ -1,5 +1,10 @@
 @DebugDescription
 public struct Bearing: Hashable {
+	public init(position: Position2D, heading: Heading) {
+		self.position = position
+		self.heading = heading
+	}
+	
 	public var position: Position2D
 	public var heading: Heading
 	
