@@ -10,9 +10,9 @@ public struct Grid2D: Hashable {
 	public init(lines: [String]) {
 		maxPos = .init(lines[0].count, lines.count)
 		values = []
-		lines.forEach {
-			$0.forEach {
-				values.append(Character(String($0)))
+		for line in lines {
+			for item in line {
+				values.append(Character(String(item)))
 			}
 		}
 	}
@@ -23,8 +23,8 @@ public struct Grid2D: Hashable {
 			positions.max { $0.y < $1.y }!.y + 1
 		)
 		values = [Character](repeating: "0", count: maxPos.arrayIndex(numCols: maxPos.x))
-		positions.forEach {
-			setValue($0, value)
+		for position in positions {
+			setValue(position, value)
 		}
 	}
 
@@ -53,7 +53,7 @@ public struct Grid2D: Hashable {
 		}
 		return positions
 	}
-	
+
 	public func col(_ y: Int) -> String {
 		if y >= maxPos.x {
 			return ""
@@ -72,7 +72,7 @@ public struct Grid2D: Hashable {
 			$0 + String(value(.init($1, x)))
 		}
 	}
-	
+
 	public func valid(_ pos: Position2D) -> Bool {
 		pos.x >= 0 && pos.y >= 0 && pos.x < maxPos.x && pos.y < maxPos.y
 	}
@@ -80,7 +80,7 @@ public struct Grid2D: Hashable {
 	public func value(_ pos: Position2D) -> Character {
 		values[pos.arrayIndex(numCols: maxPos.x)]
 	}
-	
+
 	public func safeValue(_ pos: Position2D) -> Character? {
 		if !valid(pos) {
 			return nil

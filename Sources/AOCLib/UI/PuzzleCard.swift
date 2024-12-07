@@ -62,11 +62,14 @@ struct PuzzleCard: View {
 
 struct PuzzleCard_Previews: PreviewProvider {
 	static var previews: some View {
-		Group {
-			PuzzleCard(puzzle: PuzzlePreview.unsolved())
-			PuzzleCard(puzzle: PuzzlePreview.partSolved())
-			PuzzleCard(puzzle: PuzzlePreview.solved())
+		VStack {
+			Group {
+				PuzzleCard(puzzle: PuzzlePreview.unsolved())
+				PuzzleCard(puzzle: PuzzlePreview.partSolved())
+				PuzzleCard(puzzle: PuzzlePreview.solved())
+			}
+			.frame(width: 300, height: 300)
 		}
-		.previewLayout(.fixed(width: 300, height: 300))
+		.environmentObject(PuzzleProcessing(puzzles: PuzzlePreview().puzzles))
 	}
 }

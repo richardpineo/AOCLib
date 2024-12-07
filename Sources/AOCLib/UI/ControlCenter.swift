@@ -33,6 +33,6 @@ struct ControlCenter: View {
 struct ControlCenterf_Previews: PreviewProvider {
 	static var previews: some View {
 		ControlCenter()
-			.previewLayout(.fixed(width: 400, height: 100))
+			.frame(width: 400, height: 100)
 	}
 }

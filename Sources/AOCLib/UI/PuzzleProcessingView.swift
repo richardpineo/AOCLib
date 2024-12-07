@@ -34,11 +34,13 @@ public struct PuzzleProcessingView: View {
 
 struct PuzzleProcessingView_Previews: PreviewProvider {
 	static var previews: some View {
-		Group {
-			PuzzleProcessingView(processingStep: 0, processingId: PuzzleProcessingId(id: 1, isA: true))
-			PuzzleProcessingView(processingStep: 1, processingId: PuzzleProcessingId(id: 2, isA: true))
+		VStack {
+			Group {
+				PuzzleProcessingView(processingStep: 0, processingId: PuzzleProcessingId(id: 1, isA: true))
+				PuzzleProcessingView(processingStep: 1, processingId: PuzzleProcessingId(id: 2, isA: true))
+			}
+			.frame(width: 50, height: 50)
 		}
 		.environmentObject(PuzzleProcessing(puzzles: PuzzlePreview().puzzles))
-		.previewLayout(.fixed(width: 50, height: 50))
 	}
 }

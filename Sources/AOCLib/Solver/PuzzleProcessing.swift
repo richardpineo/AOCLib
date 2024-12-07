@@ -85,7 +85,7 @@ public class PuzzleProcessing: ObservableObject {
 	}
 
 	public func clearAll() {
-		puzzles.puzzles.forEach { puzzle in
+		for puzzle in puzzles.puzzles {
 			puzzle.solutionA = ""
 			puzzle.solutionB = ""
 		}
@@ -93,7 +93,7 @@ public class PuzzleProcessing: ObservableObject {
 
 	public func processAll() {
 		clearAll()
-		puzzles.puzzles.forEach { puzzle in
+		for puzzle in puzzles.puzzles {
 			startProcessing(.init(id: puzzle.id, isA: true))
 			startProcessing(.init(id: puzzle.id, isA: false))
 		}

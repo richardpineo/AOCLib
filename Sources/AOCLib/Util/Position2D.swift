@@ -55,8 +55,8 @@ public struct Position2D: Comparable, Positional {
 			return offset(-distance, 0)
 		}
 	}
-	
-	static public func + (lhs: Position2D, rhs: Position2D) -> Position2D {
+
+	public static func + (lhs: Position2D, rhs: Position2D) -> Position2D {
 		lhs.offset(rhs)
 	}
 

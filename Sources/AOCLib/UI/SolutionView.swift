@@ -47,7 +47,7 @@ struct SolutionView: View {
 		.overlay(
 			RoundedRectangle(cornerRadius: 10)
 				.stroke(Color.black, lineWidth: 2))
-		.onReceive(self.timer) { _ in
+		.onReceive(timer) { _ in
 			self.processingStep = self.processingStep + 1
 		}
 	}
@@ -96,13 +96,15 @@ struct SolutionView: View {
 
 struct Solutionview_Previews: PreviewProvider {
 	static var previews: some View {
-		Group {
-			SolutionView(puzzle: PuzzlePreview.unsolved(), isA: true)
-			SolutionView(puzzle: PuzzlePreview.solved(), isA: true)
-			SolutionView(puzzle: PuzzlePreview.partSolved(), isA: true)
-			SolutionView(puzzle: PuzzlePreview.partSolved(), isA: false)
+		VStack {
+			Group {
+				SolutionView(puzzle: PuzzlePreview.unsolved(), isA: true)
+				SolutionView(puzzle: PuzzlePreview.solved(), isA: true)
+				SolutionView(puzzle: PuzzlePreview.partSolved(), isA: true)
+				SolutionView(puzzle: PuzzlePreview.partSolved(), isA: false)
+			}
+			.frame(width: 200, height: 100)
 		}
 		.environmentObject(PuzzlePreview().processing())
-		.previewLayout(.fixed(width: 200, height: 100))
 	}
 }
