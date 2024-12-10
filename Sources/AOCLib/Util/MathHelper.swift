@@ -73,13 +73,13 @@ public enum MathHelper {
 	}
 
 	// greatest common denominator
-	func gcd(a: Int, b: Int) -> Int {
+	public func gcd(a: Int, b: Int) -> Int {
 		if b == 0 { return a }
 		return gcd(a: b, b: a % b)
 	}
 
 	// slope between two points, reduced to the most simplified rise and run
-	func reducedSlope(_ point1: Position2D, _ point2: Position2D) -> Position2D {
+	public func reducedSlope(_ point1: Position2D, _ point2: Position2D) -> Position2D {
 		let numerator = point2.y - point1.y
 		let denominator = point2.x - point1.x
 		let gcd = gcd(a: numerator, b: denominator)
