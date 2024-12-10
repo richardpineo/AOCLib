@@ -17,12 +17,12 @@ public struct Grid2D: Hashable {
 		}
 	}
 
-	public init(positions: [Position2D], value: Character) {
+	public init(positions: [Position2D], value: Character, repeating: Character = "0") {
 		maxPos = Position2D(
 			positions.max { $0.x < $1.x }!.x + 1,
 			positions.max { $0.y < $1.y }!.y + 1
 		)
-		values = [Character](repeating: "0", count: maxPos.arrayIndex(numCols: maxPos.x))
+		values = [Character](repeating: repeating, count: maxPos.arrayIndex(numCols: maxPos.x))
 		for position in positions {
 			setValue(position, value)
 		}
