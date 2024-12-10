@@ -80,8 +80,8 @@ public enum MathHelper {
 
 	// slope between two points, reduced to the most simplified rise and run
 	public static func reducedSlope(_ point1: Position2D, _ point2: Position2D) -> Position2D {
-		let numerator = point2.y - point1.y
-		let denominator = point2.x - point1.x
+		let numerator = point2.x - point1.x
+		let denominator = point2.y - point1.y
 		let gcd = gcd(a: numerator, b: denominator)
 		return .init(numerator / gcd, denominator / gcd)
 	}
