@@ -60,7 +60,11 @@ struct SolutionView: View {
 	}
 
 	private var solution: String {
-		isA ? puzzle.solutionA : puzzle.solutionB
+		if isExample {
+			return isA ? puzzle.exampleA : puzzle.exampleB
+		} else {
+			return 	isA ? puzzle.solutionA : puzzle.solutionB
+		}
 	}
 
 	private var backgroundColor: Color {
