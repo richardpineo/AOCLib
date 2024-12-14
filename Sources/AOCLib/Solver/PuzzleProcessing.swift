@@ -72,8 +72,21 @@ public class PuzzleProcessing: ObservableObject {
 			// Report out
 			DispatchQueue.main.async {
 				if let puzzle = self.puzzles.get(byId: id.id) {
-					if id.isA { puzzle.solutionA = solution }
-					else { puzzle.solutionB = solution }
+					if id.isExample {
+						if id.isA {
+							puzzle.exampleA = solution
+						}
+						else {
+							puzzle.exampleB = solution
+						}
+					} else {
+						if id.isA {
+							puzzle.solutionA = solution
+						}
+						else {
+							puzzle.solutionB = solution
+						}
+					}
 				}
 
 				let bullet = solution.isEmpty ? (solution.isEmpty ? "🟡" : "🔴") : "🟢"
@@ -89,6 +102,8 @@ public class PuzzleProcessing: ObservableObject {
 		for puzzle in puzzles.puzzles {
 			puzzle.solutionA = ""
 			puzzle.solutionB = ""
+			puzzle.exampleA = ""
+			puzzle.exampleB = ""
 		}
 	}
 
