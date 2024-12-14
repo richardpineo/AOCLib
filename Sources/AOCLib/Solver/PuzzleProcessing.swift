@@ -4,9 +4,10 @@ import Foundation
 public struct PuzzleProcessingId: Hashable {
 	public var id: Int
 	public var isA: Bool
+	public var isExample: Bool
 
 	public var description: String {
-		"Day \(id + 1)-\(isA ? "a" : "b")"
+		"Day \(id + 1)-\(isA ? "a" : "b")\(isExample ? " ex" : "")"
 	}
 }
 
@@ -26,7 +27,7 @@ public class PuzzleProcessing: ObservableObject {
 
 	public static func preview(puzzles: Puzzles) -> PuzzleProcessing {
 		let processing = PuzzleProcessing(puzzles: puzzles)
-		processing.status[.init(id: 1, isA: true)] = .processing(Date())
+		processing.status[.init(id: 1, isA: true, isExample: true)] = .processing(Date())
 		return processing
 	}
 
@@ -94,8 +95,10 @@ public class PuzzleProcessing: ObservableObject {
 	public func processAll() {
 		clearAll()
 		for puzzle in puzzles.puzzles {
-			startProcessing(.init(id: puzzle.id, isA: true))
-			startProcessing(.init(id: puzzle.id, isA: false))
+			startProcessing(.init(id: puzzle.id, isA: true, isExample: true))
+			startProcessing(.init(id: puzzle.id, isA: true, isExample: false))
+			startProcessing(.init(id: puzzle.id, isA: false, isExample: true))
+			startProcessing(.init(id: puzzle.id, isA: false, isExample: false))
 		}
 	}
 
@@ -106,6 +109,9 @@ public class PuzzleProcessing: ObservableObject {
 			return ""
 		}
 
+		if id.isExample {
+			return id.isA ? solver.solveAExamples().description : solver.solveBExamples().description
+		}
 		return id.isA ? solver.solveA() : solver.solveB()
 	}
 

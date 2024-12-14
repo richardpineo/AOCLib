@@ -7,11 +7,17 @@ struct SolutionView: View {
 
 	var puzzle: Puzzle
 	var isA: Bool
+	var isExample: Bool
+	
 	@State var processingStep: Int = 0
 	@State private var isPulsing = false
 
 	var body: some View {
 		HStack {
+			if(isExample) {
+				Image(systemName: "testtube.2")
+			}
+			
 			Spacer()
 
 			if processing.isProcessing(processingId) {
@@ -28,9 +34,10 @@ struct SolutionView: View {
 
 			Spacer()
 
-			PuzzleProcessingView(processingStep: processingStep, processingId: PuzzleProcessingId(id: puzzle.id, isA: isA))
+			PuzzleProcessingView(processingStep: processingStep, processingId: PuzzleProcessingId(id: puzzle.id, isA: isA, isExample: isExample))
 		}
-		.padding()
+		.padding(.vertical, 4)
+		.padding(.horizontal, 5)
 		.frame(maxWidth: .infinity)
 		.contentShape(Rectangle())
 		.onTapGesture {
@@ -90,7 +97,7 @@ struct SolutionView: View {
 	}
 
 	private var processingId: PuzzleProcessingId {
-		PuzzleProcessingId(id: puzzle.id, isA: isA)
+		PuzzleProcessingId(id: puzzle.id, isA: isA, isExample: isExample)
 	}
 }
 
@@ -98,10 +105,10 @@ struct Solutionview_Previews: PreviewProvider {
 	static var previews: some View {
 		VStack {
 			Group {
-				SolutionView(puzzle: PuzzlePreview.unsolved(), isA: true)
-				SolutionView(puzzle: PuzzlePreview.solved(), isA: true)
-				SolutionView(puzzle: PuzzlePreview.partSolved(), isA: true)
-				SolutionView(puzzle: PuzzlePreview.partSolved(), isA: false)
+				SolutionView(puzzle: PuzzlePreview.unsolved(), isA: true, isExample: true)
+				SolutionView(puzzle: PuzzlePreview.solved(), isA: true, isExample: false)
+				SolutionView(puzzle: PuzzlePreview.partSolved(), isA: true, isExample: true)
+				SolutionView(puzzle: PuzzlePreview.partSolved(), isA: false, isExample: false)
 			}
 			.frame(width: 200, height: 100)
 		}

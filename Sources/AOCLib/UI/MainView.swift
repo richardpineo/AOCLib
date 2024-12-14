@@ -60,5 +60,6 @@ public struct MainView<Repo: PuzzlesRepo>: View {
 struct MainView_Previews: PreviewProvider {
 	static var previews: some View {
 		MainView(repo: PuzzlePreview())
+			.environmentObject(PuzzleProcessing(puzzles: PuzzlePreview().puzzles))
 	}
 }

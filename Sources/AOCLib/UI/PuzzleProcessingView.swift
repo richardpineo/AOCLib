@@ -36,8 +36,8 @@ struct PuzzleProcessingView_Previews: PreviewProvider {
 	static var previews: some View {
 		VStack {
 			Group {
-				PuzzleProcessingView(processingStep: 0, processingId: PuzzleProcessingId(id: 1, isA: true))
-				PuzzleProcessingView(processingStep: 1, processingId: PuzzleProcessingId(id: 2, isA: true))
+				PuzzleProcessingView(processingStep: 0, processingId: PuzzleProcessingId(id: 1, isA: true, isExample: true))
+				PuzzleProcessingView(processingStep: 1, processingId: PuzzleProcessingId(id: 2, isA: true, isExample: true))
 			}
 			.frame(width: 50, height: 50)
 		}

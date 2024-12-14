@@ -5,44 +5,35 @@ struct PuzzleCard: View {
 	@ObservedObject var puzzle: Puzzle
 
 	var body: some View {
-		ZStack {
-			Color(backgroundColor).opacity(0.5)
-				.cornerRadius(10)
-
-			RoundedRectangle(cornerRadius: 10)
-				.stroke(Color.black, lineWidth: 2)
-
-			VStack {
-				Spacer()
-
-				Text("Day \(puzzle.id)")
-					.font(.system(size: 24, weight: .semibold))
-					.padding(.bottom, 10)
-
-				Group {
-					if puzzle.name.isEmpty {
-						Text("Not revealed")
-							.font(.system(size: 18)).italic()
-							.foregroundColor(.secondary)
-					} else {
-						Text(puzzle.name)
-							.font(.system(size: 24))
-							.frame(height: 75)
-					}
+		VStack {
+			Text("Day \(puzzle.id)")
+				.font(.system(size: 24, weight: .semibold))
+			
+			Group {
+				if puzzle.name.isEmpty {
+					Text("Not revealed")
+						.font(.system(size: 18)).italic()
+						.foregroundColor(.secondary)
+				} else {
+					Text(puzzle.name)
+						.font(.system(size: 24))
+						.frame(height: 75)
 				}
-				.padding(.horizontal)
-				.fixedSize(horizontal: false, vertical: true)
-
-				Spacer()
-
-				SolutionView(puzzle: puzzle, isA: true)
-					.padding(.horizontal)
-
-				SolutionView(puzzle: puzzle, isA: false)
-					.padding()
 			}
+			
+			SolutionView(puzzle: puzzle, isA: true, isExample: true)
+			
+			SolutionView(puzzle: puzzle, isA: true, isExample: false)
+			
+			SolutionView(puzzle: puzzle, isA: false, isExample: true)
+			
+			SolutionView(puzzle: puzzle, isA: false, isExample: false)
 		}
-		.frame(height: 300)
+		.padding()
+		.background(Color(backgroundColor).opacity(0.5))
+		.border(.black)
+		.cornerRadius(10)
+		.overlay(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 3))
 	}
 
 	var backgroundColor: UIColor {
@@ -63,13 +54,11 @@ struct PuzzleCard: View {
 struct PuzzleCard_Previews: PreviewProvider {
 	static var previews: some View {
 		VStack {
-			Group {
 				PuzzleCard(puzzle: PuzzlePreview.unsolved())
 				PuzzleCard(puzzle: PuzzlePreview.partSolved())
 				PuzzleCard(puzzle: PuzzlePreview.solved())
-			}
-			.frame(width: 300, height: 300)
 		}
+		.frame(width: 300)
 		.environmentObject(PuzzleProcessing(puzzles: PuzzlePreview().puzzles))
 	}
 }
