@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct PuzzleProcessingId: Hashable {
+public struct PuzzleProcessingId: Hashable, Sendable {
 	public var id: Int
 	public var isA: Bool
 	public var isExample: Bool
@@ -11,6 +11,7 @@ public struct PuzzleProcessingId: Hashable {
 	}
 }
 
+@MainActor
 public class PuzzleProcessing: ObservableObject {
 	public enum ProcessingStatus {
 		case idle
@@ -59,43 +60,37 @@ public class PuzzleProcessing: ObservableObject {
 		}
 	}
 
-	public func startProcessing(_ id: PuzzleProcessingId) {
+	public func startProcessing(_ id: PuzzleProcessingId) async {
 		if isProcessing(id) {
 			return
 		}
 		status[id] = .processing(Date())
 
-		DispatchQueue.global().async {
-			// Self.log(id, "start")
-			let solution = self.solve(id)
+		// Self.log(id, "start")
+		let solution = solve(id)
 
-			// Report out
-			DispatchQueue.main.async {
-				if let puzzle = self.puzzles.get(byId: id.id) {
-					if id.isExample {
-						if id.isA {
-							puzzle.exampleA = solution
-						}
-						else {
-							puzzle.exampleB = solution
-						}
-					} else {
-						if id.isA {
-							puzzle.solutionA = solution
-						}
-						else {
-							puzzle.solutionB = solution
-						}
-					}
+		// Report out
+		if let puzzle = puzzles.get(byId: id.id) {
+			if id.isExample {
+				if id.isA {
+					puzzle.exampleA = solution
+				} else {
+					puzzle.exampleB = solution
 				}
-
-				let bullet = solution.isEmpty ? (solution.isEmpty ? "🟡" : "🔴") : "🟢"
-				let solutionDisplay = solution.padding(toLength: 16, withPad: " ", startingAt: 0)
-				let elapsedDisplay = lround(self.elapsed(id)!.magnitude * 1000).description
-				Self.log(id, "\(bullet) \(solutionDisplay) \(elapsedDisplay) ms")
-				self.status[id] = .idle
+			} else {
+				if id.isA {
+					puzzle.solutionA = solution
+				} else {
+					puzzle.solutionB = solution
+				}
 			}
 		}
+
+		let bullet = solution.isEmpty ? (solution.isEmpty ? "🟡" : "🔴") : "🟢"
+		let solutionDisplay = solution.padding(toLength: 16, withPad: " ", startingAt: 0)
+		let elapsedDisplay = lround(elapsed(id)!.magnitude * 1000).description
+		Self.log(id, "\(bullet) \(solutionDisplay) \(elapsedDisplay) ms")
+		status[id] = .idle
 	}
 
 	public func clearAll() {
@@ -107,13 +102,15 @@ public class PuzzleProcessing: ObservableObject {
 		}
 	}
 
-	public func processAll() {
+	public func processAll() async {
 		clearAll()
-		for puzzle in puzzles.puzzles {
-			startProcessing(.init(id: puzzle.id, isA: true, isExample: true))
-			startProcessing(.init(id: puzzle.id, isA: true, isExample: false))
-			startProcessing(.init(id: puzzle.id, isA: false, isExample: true))
-			startProcessing(.init(id: puzzle.id, isA: false, isExample: false))
+		await withTaskGroup(of: Void.self) { group in
+			for puzzle in puzzles.puzzles {
+				group.addTask { await self.startProcessing(.init(id: puzzle.id, isA: true, isExample: true)) }
+				group.addTask { await self.startProcessing(.init(id: puzzle.id, isA: true, isExample: false)) }
+				group.addTask { await self.startProcessing(.init(id: puzzle.id, isA: false, isExample: true)) }
+				group.addTask { await self.startProcessing(.init(id: puzzle.id, isA: false, isExample: false)) }
+			}
 		}
 	}
 

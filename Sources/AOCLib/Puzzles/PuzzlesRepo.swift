@@ -1,6 +1,7 @@
 
 import SwiftUI
 
+@MainActor
 public protocol PuzzlesRepo {
 	associatedtype Details: View
 

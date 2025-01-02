@@ -1,6 +1,7 @@
 
 import Foundation
 
+@MainActor
 public class Puzzles: ObservableObject {
 	public func get(byId id: Int) -> Puzzle? {
 		puzzles.first { $0.id == id }

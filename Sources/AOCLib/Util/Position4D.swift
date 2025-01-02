@@ -1,7 +1,7 @@
 
 import Foundation
 
-public struct Position4D: Hashable, Positional {
+public struct Position4D: Hashable, Positional, Sendable {
 	public init(_ x: Int, _ y: Int, _ z: Int, _ w: Int) {
 		self.x = x
 		self.y = y

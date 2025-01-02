@@ -81,6 +81,10 @@ public struct Grid2D: Hashable {
 		values[pos.arrayIndex(numCols: maxPos.x)]
 	}
 
+	public func valueAsInt(_ pos: Position2D) -> Int? {
+		Int(String(value(pos)))
+	}
+
 	public func safeValue(_ pos: Position2D) -> Character? {
 		if !valid(pos) {
 			return nil

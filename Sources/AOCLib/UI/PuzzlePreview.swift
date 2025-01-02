@@ -3,6 +3,7 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 class PuzzlePreview: PuzzlesRepo {
 	static func solved() -> Puzzle {
 		let p = Puzzle(year: 1974, id: 0, name: "An easy one") {

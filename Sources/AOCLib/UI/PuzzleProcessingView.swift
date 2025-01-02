@@ -11,7 +11,9 @@ public struct PuzzleProcessingView: View {
 	public var body: some View {
 		HStack {
 			Button(action: {
-				processing.startProcessing(processingId)
+				Task {
+					await processing.startProcessing(processingId)
+				}
 			}) {
 				Image(systemName: image)
 			}

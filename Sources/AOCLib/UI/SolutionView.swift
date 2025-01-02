@@ -8,16 +8,17 @@ struct SolutionView: View {
 	var puzzle: Puzzle
 	var isA: Bool
 	var isExample: Bool
-	
+
 	@State var processingStep: Int = 0
 	@State private var isPulsing = false
 
 	var body: some View {
 		HStack {
-			if(isExample) {
+			if isExample {
 				Image(systemName: "testtube.2")
+					.tint(Color(.systemRed))
 			}
-			
+
 			Spacer()
 
 			if processing.isProcessing(processingId) {
@@ -63,7 +64,7 @@ struct SolutionView: View {
 		if isExample {
 			return isA ? puzzle.exampleA : puzzle.exampleB
 		} else {
-			return 	isA ? puzzle.solutionA : puzzle.solutionB
+			return isA ? puzzle.solutionA : puzzle.solutionB
 		}
 	}
 

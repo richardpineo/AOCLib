@@ -15,7 +15,9 @@ struct ControlCenter: View {
 				}
 
 				Button(action: {
-					processing.processAll()
+					Task {
+						await processing.processAll()
+					}
 				}) {
 					Image(systemName: "forward")
 					Text("Run All")

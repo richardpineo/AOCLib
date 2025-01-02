@@ -16,10 +16,11 @@ public struct ProcessingIndicatorView: View {
 				.stroke(Color.green, lineWidth: 3)
 				.frame(width: 30, height: 3)
 				.offset(x: isProcessing ? 110 : -110, y: 0)
-				.animation(Animation.linear(duration: 1).repeatForever(autoreverses: true))
 		}
 		.onAppear {
-			self.isProcessing = true
+			withAnimation(Animation.linear(duration: 1).repeatForever(autoreverses: true)) {
+				self.isProcessing = true
+			}
 		}
 	}
 }

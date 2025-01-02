@@ -8,7 +8,8 @@ public enum SolutionState {
 	case solvedA
 }
 
-public class Puzzle: Identifiable, ObservableObject {
+@MainActor
+public class Puzzle: @preconcurrency Identifiable, ObservableObject {
 	public typealias MakeSolver = () -> PuzzleSolver
 
 	public init(year: Int, id: Int, name: String, maker: @escaping MakeSolver) {
@@ -45,7 +46,7 @@ public class Puzzle: Identifiable, ObservableObject {
 			UserDefaults.standard.set(solutionA, forKey: Puzzle.userDefaultKey(year: year, id: id, isA: true, isExample: false))
 		}
 	}
-	
+
 	@Published public var exampleA: String {
 		didSet {
 			UserDefaults.standard.set(solutionA, forKey: Puzzle.userDefaultKey(year: year, id: id, isA: true, isExample: true))
