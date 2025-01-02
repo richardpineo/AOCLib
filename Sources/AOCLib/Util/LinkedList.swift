@@ -146,6 +146,14 @@ public final class LinkedList<T> {
             prev.next = newNode
         }
     }
+	
+	public func insert(_ newNode: Node, after: Node) {
+		let next = after.next
+		newNode.previous = after
+		newNode.next = next
+		next?.previous = newNode
+		after.next = newNode
+	}
     
     /// Insert a copy of a LinkedList at a specific index. Crashes if index is out of bounds (0...self.count)
     ///
