@@ -2,9 +2,9 @@ public final class LinkedList<T> {
     
     /// Linked List's Node Class Declaration
     public class LinkedListNode<TN> {
-        var value: TN
-        var next: LinkedListNode?
-        weak var previous: LinkedListNode?
+        public var value: TN
+		public var next: LinkedListNode?
+		public weak var previous: LinkedListNode?
         
         public init(value: TN) {
             self.value = value
@@ -268,7 +268,7 @@ extension LinkedList {
 
 // MARK: - Extension to enable initialization from an Array
 extension LinkedList {
-    convenience init(array: Array<T>) {
+	public convenience init(array: Array<T>) {
         self.init()
         
         array.forEach { append($0) }
