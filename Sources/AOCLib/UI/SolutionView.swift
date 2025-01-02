@@ -15,8 +15,8 @@ struct SolutionView: View {
 	var body: some View {
 		HStack {
 			if isExample {
-				Image(systemName: "testtube.2")
-					.tint(Color(.systemRed))
+				Image ( systemName: "testtube.2")
+					.foregroundStyle(Color(.systemBlue))
 			}
 
 			Spacer()
